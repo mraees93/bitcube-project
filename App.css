@@ -1,0 +1,39 @@
+/* .App {
+  text-align: center;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+
+body{
+    font-family: 'Permanent-Marker', cursive;
+    color: black;
+}
+h1{
+    font-size: 64px !important;
+    text-align: center;
+    margin: auto;
+    padding-top: 80px;
+}
+h2{
+    font-size: 48px !important;
+    text-align: center;
+    margin: auto;
+    padding-top: 35px;
+}
+p{
+    font-size: 24px;
+    text-align: center;
+    padding-top: 80px;
+}
+li{
+  list-style: none;
+  
+}
+.signin, .signup {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  font-size: 28px;
+}
+
