@@ -1,35 +1,31 @@
-import React, { useEffect } from 'react';
-import { Route, Switch } from "react-router-dom";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from "./container/Home";
-import Signin from "./container/Signin";
-import Signup from "./container/Signup";
-import { useDispatch, useSelector } from "react-redux";
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const env = require("dotenv");
+const mongoose = require("mongoose");
 
+env.config();
+app.use(express.json());
+app.use(cors());
+app.use(express.json({ extended: false }));
+// import routes
+const authRoutes = require("./routes/auth");
+// use routes
+app.use('/api', authRoutes);
 
+// connect to db
+const uri = "mongodb+srv://user:@users.y6fgk.mongodb.net/mern-login?retryWrites=true&w=majority";
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  // always add this as db wont connect properly
+  useCreateIndex: true  
+})
+.then(() => {
+  console.log("mongoDB connected")
+})
+.catch(err => console.log(err))
 
-function App() {
-
-  const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth)
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line
-  //   if (!auth.authenticate) {
-  //     dispatch(isUserLoggedIn());
-  //   }
-  // }, []);
-
-  return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/signin" component={Signin} />
-        <Route path="/signup" component={Signup} />
-      </Switch>
-    </div>
-  );
-}
-
-export default App;
+// to start server
+app.listen(5000, () =>
+console.log("server started on port 5000"))
