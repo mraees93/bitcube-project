@@ -3,6 +3,8 @@ const cors = require("cors");
 const app = express();
 const env = require("dotenv");
 const mongoose = require("mongoose");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
 
 env.config();
 app.use(express.json());
@@ -13,9 +15,17 @@ const authRoutes = require("./routes/auth");
 // use routes
 app.use('/api', authRoutes);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static( "client/build" ));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html")); //relative path
+  });
+}
+
 // connect to db
 const uri = "mongodb+srv://user:@users.y6fgk.mongodb.net/mern-login?retryWrites=true&w=majority";
-mongoose.connect(uri, {
+mongoose.connect(process.env.MONGODB_URI || uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // always add this as db wont connect properly
@@ -26,6 +36,8 @@ mongoose.connect(uri, {
 })
 .catch(err => console.log(err))
 
+
+
 // to start server
-app.listen(5000, () =>
-console.log("server started on port 5000"))
+app.listen(PORT, () =>
+console.log("server started on PORT: ${PORT}"))
