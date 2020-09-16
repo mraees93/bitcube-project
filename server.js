@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // connect to db
-const uri = "mongodb+srv://user:@users.y6fgk.mongodb.net/mern-login?retryWrites=true&w=majority";
+const uri = "mongodb+srv://user:user@users.y6fgk.mongodb.net/mern-login?retryWrites=true&w=majority";
 mongoose.connect(process.env.MONGODB_URI || uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
