@@ -2,11 +2,10 @@
   text-align: center;
 } */
 
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 
 body{
-    font-family: 'Permanent-Marker', cursive;
+    font-family: 'Helvetica Neue', arial;
     color: black;
 }
 h1{
